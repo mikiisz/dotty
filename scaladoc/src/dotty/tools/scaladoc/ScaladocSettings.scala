@@ -94,3 +94,9 @@ class ScaladocSettings extends SettingGroup with AllScalaSettings:
 
   val YdocumentSyntheticTypes: Setting[Boolean] =
     BooleanSetting("-Ydocument-synthetic-types", "Documents intrinsic types e. g. Any, Nothing. Setting is useful only for stdlib", false)
+
+  val inkuire: Setting[Boolean] =
+    BooleanSetting("-inkuire", "Allows searching the scaladoc with Hoogle like queries", false)
+
+  val generateInkuire: Settings[Boolean] =
+    BooleanSetting("-genarate-inkuire", "Generates InkuireDB", false)
