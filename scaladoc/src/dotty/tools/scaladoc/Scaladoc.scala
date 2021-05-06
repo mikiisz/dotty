@@ -53,6 +53,8 @@ object Scaladoc:
     includePrivateAPI: Boolean = false,
     docCanonicalBaseUrl: String = "",
     documentSyntheticTypes: Boolean = false,
+    inkuire: Boolean = false,
+    generateInkuire : Boolean = false,
   )
 
   def run(args: Array[String], rootContext: CompilerContext): Reporter =
@@ -77,9 +79,8 @@ object Scaladoc:
         report.inform("Done")
       else report.error("Failure")
 
+      if parsedArgs.generateInkuire then dumpInkuireDB()
     }
-
-    if summon[DocContext].generateInkuire then dumpInkuireDB()
 
     ctx.reporter
 
@@ -205,7 +206,9 @@ object Scaladoc:
         groups.get,
         visibilityPrivate.get,
         docCanonicalBaseUrl.get,
-        YdocumentSyntheticTypes.get
+        YdocumentSyntheticTypes.get,
+        inkuire.get,
+        generateInkuire.get
       )
       (Some(docArgs), newContext)
     }
