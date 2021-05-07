@@ -53,7 +53,6 @@ object Scaladoc:
     includePrivateAPI: Boolean = false,
     docCanonicalBaseUrl: String = "",
     documentSyntheticTypes: Boolean = false,
-    inkuire: Boolean = false,
     generateInkuire : Boolean = false,
   )
 
@@ -207,7 +206,6 @@ object Scaladoc:
         visibilityPrivate.get,
         docCanonicalBaseUrl.get,
         YdocumentSyntheticTypes.get,
-        inkuire.get,
         generateInkuire.get
       )
       (Some(docArgs), newContext)
