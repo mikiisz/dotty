@@ -14,6 +14,27 @@ class SearchbarComponent(engine: SearchbarEngine, inkuireEngine: InkuireDelegate
       wrapper.classList.add("monospace")
 
       val resultA = document.createElement("a").asInstanceOf[html.Anchor]
+      resultA.href = Globals.pathToRoot + p.location
+      resultA.text = s"${p.fullName}"
+
+      val location = document.createElement("span")
+      location.classList.add("pull-right")
+      location.classList.add("scaladoc-searchbar-location")
+      location.textContent = p.description
+
+      wrapper.appendChild(resultA)
+      wrapper.appendChild(location)
+      wrapper.addEventListener("mouseover", {
+        case e: MouseEvent => handleHover(wrapper)
+      })
+      wrapper
+
+    def toHTMLInkuireHack =
+      val wrapper = document.createElement("div").asInstanceOf[html.Div]
+      wrapper.classList.add("scaladoc-searchbar-result")
+      wrapper.classList.add("monospace")
+
+      val resultA = document.createElement("a").asInstanceOf[html.Anchor]
       resultA.href = Globals.pathToRoot + p.location.drop(21) //TODO change when generating XD
       resultA.text = s"${p.fullName}"
 
@@ -61,7 +82,7 @@ class SearchbarComponent(engine: SearchbarEngine, inkuireEngine: InkuireDelegate
         case BySignature(signature) =>
           println("Searching")
           inkuireEngine.query(query) { (p: PageEntry) =>
-            resultsDiv.appendChild(p.toHTML)
+            resultsDiv.appendChild(p.toHTMLInkuireHack)
           }
       }
     }
