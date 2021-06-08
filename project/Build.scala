@@ -1257,7 +1257,7 @@ object Build {
         name,
         scalaSrcLink(stdLibVersion, srcManaged(dottyNonBootstrappedVersion, "scala")),
         dottySrcLink(referenceVersion, srcManaged(dottyNonBootstrappedVersion, "dotty"))
-      ) ++ scalacOptionsDocSettings ++ revision ++ params ++ targets
+      ) ++ scalacOptionsDocSettings ++ revision ++ params ++ targets ++ Seq("-generate-inkuire")
       import _root_.scala.sys.process._
       Def.task((s"$distLocation/bin/scaladoc" +: cmd).!)
     }
